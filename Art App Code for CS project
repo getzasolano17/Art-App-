@@ -1,22 +1,21 @@
-code: 
 from tkinter import *
 from tkinter.colorchooser import askcolor
 from PIL import ImageGrab
 
 
-class FilenamePopup:
+class FilenamePopup():
     def __init__(self, master):
-        top = self.top = Toplevel(master)
-        self.lbl = Label(top, text="Choose a file name:")
+        self.root = Toplevel(master)
+        self.lbl = Label(self.root, text="Choose a file name:")
         self.lbl.pack()
-        self.ent_filename = Entry(top)
+        self.ent_filename = Entry(self.root)
         self.ent_filename.pack()
-        self.btn_ok = Button(top, text='Ok', command=self.cleanup)
+        self.btn_ok = Button(self.root, text='Ok', command=self.cleanup)
         self.btn_ok.pack()
 
     def cleanup(self):
         self.filename = self.ent_filename.get()
-        self.top.destroy()
+        self.root.destroy()
 
 class Paint(object):
 
@@ -99,7 +98,7 @@ class Paint(object):
 
     def save_screenshot(self):
       filename_popup = FilenamePopup(self.root)
-      self.root.wait_window(filename_popup.top)
+      self.root.wait_window(filename_popup.root)
       filename = filename_popup.filename
 
       if filename:
@@ -110,3 +109,4 @@ class Paint(object):
 
 if __name__ == '__main__':
     Paint()
+
